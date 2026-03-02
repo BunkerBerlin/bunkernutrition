@@ -34,7 +34,6 @@
       cursor: none;
     }
 
-    /* Custom cursor */
     .cursor {
       position: fixed;
       width: 10px; height: 10px;
@@ -42,8 +41,10 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, opacity 0.3s ease;
       mix-blend-mode: difference;
+      opacity: 0;
+      transform: translate(-50%, -50%);
     }
     .cursor-ring {
       position: fixed;
@@ -52,8 +53,9 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
-      transition: all 0.3s ease;
-      opacity: 0.5;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      transform: translate(-50%, -50%);
     }
 
     /* Grain overlay */
@@ -803,8 +805,10 @@
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursor.style.left = mouseX - 5 + 'px';
-      cursor.style.top = mouseY - 5 + 'px';
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+      cursor.style.opacity = '1';
+      ring.style.opacity = '0.5';
     });
 
     function animateRing() {
@@ -815,6 +819,16 @@
       requestAnimationFrame(animateRing);
     }
     animateRing();
+
+    // Show cursor on mouse enter
+    document.addEventListener('mouseenter', () => {
+      cursor.style.opacity = '1';
+      ring.style.opacity = '0.5';
+    });
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+      ring.style.opacity = '0';
+    });
 
     // Hover effect on interactive elements
     document.querySelectorAll('a, button, .flavor-card').forEach(el => {
