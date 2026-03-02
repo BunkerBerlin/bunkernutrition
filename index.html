@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -650,7 +650,13 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="protein.png" alt="Bunker Nutrition Whey Protein Milchreis & Zimt" />
+      <img src="protein.png" alt="Bunker Nutrition Whey Protein" id="heroImg" />
+      <div class="flavor-switcher">
+        <button class="fsw active" data-img="protein.png">Milchreis &amp; Zimt</button>
+        <button class="fsw" data-img="schoko.png">Schokolade</button>
+        <button class="fsw" data-img="butterkeks.png">Butterkeks</button>
+        <button class="fsw" data-img="vanille.png">Vanille</button>
+      </div>
     </div>
   </section>
 
@@ -799,6 +805,20 @@
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Flavor switcher
+    document.querySelectorAll('.fsw').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fsw').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const img = document.getElementById('heroImg');
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = btn.dataset.img;
+          img.style.opacity = '1';
+        }, 300);
+      });
+    });
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
