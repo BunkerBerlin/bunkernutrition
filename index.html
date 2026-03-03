@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -808,24 +808,24 @@
     <div class="footer-copy">© 2026 Bunker Nutrition</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>  <script>
     // Flavor switcher
-    document.querySelectorAll('.fsw').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.fsw').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.fsw').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.fsw').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        const img = document.getElementById('heroImg');
+        var img = document.getElementById('heroImg');
         img.style.opacity = '0';
-        setTimeout(() => {
-          img.src = btn.dataset.img;
+        setTimeout(function() {
+          img.src = btn.getAttribute('data-img');
           img.style.opacity = '1';
         }, 300);
       });
     });
 
     // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
@@ -833,6 +833,12 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.flavor-card, .fact-row, .ingredient-tag').forEach(el => {
+    document.querySelectorAll('.flavor-card, .fact-row, .ingredient-tag').forEach(function(el) {
       el.style.opacity = '0';
-      el.style.transform = '
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
